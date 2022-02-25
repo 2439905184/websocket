@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client</title>
+</head>
+<body>
+<script>
+    var ws = new WebSocket("ws://websocket:8080")
+    console.log(ws)
+    ws.onopen = function(evt)
+    {
+      console.log("连接被打开")
+      console.log("发送消息")
+      ws.send("hello")
+    }
+    ws.onmessage = function(evt)
+    {
+        console.log("收到信息"+evt.data)
+        //ws.close()
+    }
+    ws.onclose = function(evt)
+    {
+        console.log("连接被关闭")
+        console.log(evt.data)
+    }
+    //客户端发送给服务器
+    function client_send()
+    {
+        ws.send("hello")
+        //var msg = document.getElementById("")
+    }
+    //服务器发送给客户端
+    function sever_send()
+    {
+
+    }
+    </script>
+</body>
+</html>
