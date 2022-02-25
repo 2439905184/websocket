@@ -12,6 +12,36 @@
     <h2>服务器返回</h2>
 
     <script>
+        //前后端必须分离！
+       /* var ws = new WebSocket("ws://websocket:8080")
+    console.log(ws)
+    ws.onopen = function(evt)
+    {
+      console.log("连接被打开")
+      console.log("发送消息")
+      ws.send("hello")
+    }
+    ws.onmessage = function(evt)
+    {
+        console.log("收到信息"+evt.data)
+        //ws.close()
+    }
+    ws.onclose = function(evt)
+    {
+        console.log("连接被关闭")
+        console.log(evt.data)
+    }
+    //客户端发送给服务器
+    function client_send()
+    {
+        ws.send("hello")
+        //var msg = document.getElementById("")
+    }
+    //服务器发送给客户端
+    function sever_send()
+    {
+
+    }*/
     </script>
 </body>
 </html>
