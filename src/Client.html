@@ -5,26 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client</title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
 <script>
-    var ws = new WebSocket("ws://websocket:8080")
+    console.warn("启动boot.php!")
+    $(function()
+    {
+        $.get("boot.php",function(data,status)
+        {
+            console.log(status)
+            console.log(data)
+        })
+    })
+    var ws= new WebSocket("ws://websocket:8080")
     console.log(ws)
+    //setInterval(heart,3000)
     ws.onopen = function(evt)
     {
       console.log("连接被打开")
-      console.log("发送消息")
-      ws.send("hello")
+      if(ws.readyState == 0)
+      {
+        console.log("连接尚未建立")
+      }
+      else if(ws.readyState == 1)
+      {
+          console.log("连接已建立，可以进行通信")
+          console.log("发送了hello数据")
+          ws.send("hello")
+      }
+      else if(ws.readyState == 3)
+      {
+          console.log("连接正在进行关闭")
+      }
+      //console.log(evt)
+    }
+    function heart()
+    {
+        console.log("心跳数据发送")
+        //ws.send("hello")
+        //ws = new WebSocket("ws://websocket:8080")
     }
     ws.onmessage = function(evt)
     {
+        console.log(evt)
         console.log("收到信息"+evt.data)
         //ws.close()
     }
     ws.onclose = function(evt)
     {
         console.log("连接被关闭")
-        console.log(evt.data)
+        //ws = new WebSocket("ws://websocket:8080")
     }
     //客户端发送给服务器
     function client_send()

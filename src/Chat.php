@@ -13,19 +13,22 @@ class Chat implements MessageComponentInterface {
     {
         //保存链接信息
         $this->clients->attach($conn);
-        echo "New connection! ({$conn->resourceId})\n";
+        //echo "New connection! ({$conn->resourceId})\n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg) 
     {
         $numRecv = count($this->clients) - 1;
-        echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n"
+        /*echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n"
             , $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
-
+        */
+        //var_dump($this->clients);
         foreach ($this->clients as $client) {
-            if ($from !== $client) {
+            if ($from !== $client) 
+            {
                 // The sender is not the receiver, send to each client connected
                 $client->send($msg);
+                echo "send";
             }
         }
     }
